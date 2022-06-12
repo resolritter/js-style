@@ -1,0 +1,26 @@
+{
+  "name": "js-style",
+  "version": "0.0.0",
+  "license": "Unlicense",
+  "scripts": {
+    "fix:eslint": "eslint --fix",
+    "fix:prettier": "prettier --write",
+    "fix": "yarn fix:eslint '{*,**/*}.js' && yarn fix:prettier '{*,**/*}.json'"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.13.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "prettier": "^2.6.2",
+    "prettier-plugin-compactify": "^0.1.6"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.3"
+  }
+}
