@@ -92,6 +92,7 @@ const baseRules = {
   "no-redeclare": "error",
   "arrow-parens": "error",
   "arrow-body-style": ["error", "always"],
+  "prefer-const": "error",
 }
 
 const typescriptRules = {
