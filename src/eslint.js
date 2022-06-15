@@ -63,7 +63,7 @@ const baseRules = {
   // misc
   "no-unreachable-loop": "error",
   "multiline-comment-style": ["error", "bare-block"],
-  "no-constant-condition": "off",
+  "no-constant-condition": ["error", { checkLoops: false }],
   "require-atomic-updates": "off",
   "use-isnan": "error",
   "no-restricted-syntax": [
@@ -146,8 +146,13 @@ const typescriptRules = {
   "@typescript-eslint/no-array-constructor": "error",
   "@typescript-eslint/no-invalid-this": "error",
   "@typescript-eslint/no-empty-function": "off",
-  "dot-notation": "off", // can conflict with "@typescript-eslint/dot-notation"
+  "dot-notation": "off", // conflicts with @typescript-eslint/dot-notation
   "@typescript-eslint/dot-notation": "error",
+  "no-constant-condition": "off", // conflicts with @typescript-eslint/no-unnecessary-condition
+  "@typescript-eslint/no-unnecessary-condition": [
+    "error",
+    { allowConstantLoopConditions: true },
+  ],
 }
 
 const baseExtends = ["eslint:recommended", "plugin:prettier/recommended"]
