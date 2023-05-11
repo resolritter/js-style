@@ -172,9 +172,9 @@ const getEslintTypescriptOverride = ({ rootDir }) => {
     parserOptions: {
       project: path.join(rootDir, "tsconfig.json"),
       tsconfigRootDir: rootDir,
-      extraFileExtensions: [".cjs"],
+      extraFileExtensions: [".cjs", ".mjs"],
     },
-    files: "{*,**,**/*}.ts",
+    files: "{*,**,**/*}.{ts,tsx,mts}",
     rules: { ...baseRules, ...typescriptRules },
   }
 }
