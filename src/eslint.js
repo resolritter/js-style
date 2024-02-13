@@ -169,6 +169,7 @@ const getEslintTypescriptOverride = ({ rootDir }) => {
   return {
     plugins: [...basePlugins, "@typescript-eslint"],
     extends: [...baseExtends, "plugin:@typescript-eslint/recommended"],
+    parser: "@typescript-eslint/parser",
     parserOptions: {
       project: path.join(rootDir, "tsconfig.json"),
       tsconfigRootDir: rootDir,
@@ -188,10 +189,7 @@ const getEslintConfiguration = ({ typescript } = {}) => {
     rules: baseRules,
     parserOptions: { ecmaVersion: "latest" },
     ...(typescript
-      ? {
-          parser: "@typescript-eslint/parser",
-          overrides: [getEslintTypescriptOverride(typescript)],
-        }
+      ? { overrides: [getEslintTypescriptOverride(typescript)] }
       : {}),
   }
 }
