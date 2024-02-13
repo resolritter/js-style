@@ -8,7 +8,6 @@ const baseRules = {
 
   // related to the "unused-imports" plugin
   "no-unused-vars": "off",
-  "@typescript-eslint/no-unused-vars": "off",
   "unused-imports/no-unused-imports-ts": "error",
   "unused-imports/no-unused-vars-ts": [
     "error",
@@ -107,6 +106,7 @@ const typescriptRules = {
       allowNullableString: true,
     },
   ],
+  "@typescript-eslint/no-unused-vars": "off", // related to the "unused-imports" plugin
   "@typescript-eslint/explicit-module-boundary-types": "off",
   "@typescript-eslint/explicit-function-return-type": "off",
   "@typescript-eslint/no-empty-interface": "off",
@@ -183,11 +183,16 @@ const getEslintConfiguration = ({ typescript } = {}) => {
   return {
     env: { node: true },
     root: true,
-    parser: "@typescript-eslint/parser",
     extends: baseExtends,
     plugins: basePlugins,
     rules: baseRules,
-    overrides: typescript ? [getEslintTypescriptOverride(typescript)] : [],
+    parserOptions: { ecmaVersion: "latest" },
+    ...(typescript
+      ? {
+          parser: "@typescript-eslint/parser",
+          overrides: [getEslintTypescriptOverride(typescript)],
+        }
+      : {}),
   }
 }
 
