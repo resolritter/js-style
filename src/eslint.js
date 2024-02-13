@@ -182,7 +182,6 @@ const getEslintTypescriptOverride = ({ rootDir }) => {
 
 const getEslintConfiguration = ({ typescript } = {}) => {
   return {
-    env: { node: true },
     root: true,
     extends: baseExtends,
     plugins: basePlugins,
