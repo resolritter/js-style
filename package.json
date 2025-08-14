@@ -2,25 +2,27 @@
   "name": "js-style",
   "version": "0.0.0",
   "license": "Unlicense",
+  "type": "commonjs",
   "scripts": {
     "fix:eslint": "eslint --fix",
     "fix:prettier": "prettier --write",
     "fix": "yarn fix:eslint '{*,**/*}.js' && yarn fix:prettier '{*,**/*}.json'"
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.27.1",
-    "@typescript-eslint/parser": "^5.27.1",
-    "eslint": "^8.17.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "eslint-plugin-sonarjs": "^0.13.0",
-    "eslint-plugin-unused-imports": "^2.0.0",
-    "prettier": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-sonarjs": "^3.0.4",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier": "^3.6.2",
     "prettier-plugin-compactify": "^0.1.6"
   },
   "devDependencies": {
-    "typescript": "^4.7.3"
-  }
+    "typescript": "^5.9.2"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
