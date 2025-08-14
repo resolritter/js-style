@@ -8,8 +8,8 @@ const baseRules = {
 
   // related to the "unused-imports" plugin
   "no-unused-vars": "off",
-  "unused-imports/no-unused-imports-ts": "error",
-  "unused-imports/no-unused-vars-ts": [
+  "unused-imports/no-unused-imports": "error",
+  "unused-imports/no-unused-vars": [
     "error",
     {
       vars: "all",
@@ -94,103 +94,127 @@ const baseRules = {
   "prefer-const": "error",
 }
 
-const typescriptRules = {
-  "no-undef": "off", // this rule is already checked by TypeScript itself
-  "@typescript-eslint/strict-boolean-expressions": [
-    "error",
-    {
-      allowString: true,
-      allowNullableBoolean: true,
-      allowNumber: true,
-      allowNullableNumber: true,
-      allowNullableString: true,
-    },
-  ],
-  "@typescript-eslint/no-unused-vars": "off", // related to the "unused-imports" plugin
-  "@typescript-eslint/explicit-module-boundary-types": "off",
-  "@typescript-eslint/explicit-function-return-type": "off",
-  "@typescript-eslint/no-empty-interface": "off",
-  "@typescript-eslint/interface-name-prefix": "off",
-  "@typescript-eslint/no-inferrable-types": "off",
-  "@typescript-eslint/restrict-plus-operands": "error",
-  "@typescript-eslint/restrict-template-expressions": "error",
-  "@typescript-eslint/no-floating-promises": "error",
-  "@typescript-eslint/no-explicit-any": "off",
-  "@typescript-eslint/no-misused-new": "error",
-  "@typescript-eslint/await-thenable": "error",
-  "no-return-await": "off", // conflicts with @typescript-eslint/return-await
-  "@typescript-eslint/return-await": ["error", "always"],
-  "@typescript-eslint/require-await": "error",
-  "@typescript-eslint/no-throw-literal": "error",
-  "@typescript-eslint/no-shadow": "error",
-  "@typescript-eslint/array-type": "error",
-  "@typescript-eslint/ban-ts-comment": "error",
-  "@typescript-eslint/ban-types": "error",
-  "@typescript-eslint/consistent-type-assertions": [
-    "error",
-    { assertionStyle: "as", objectLiteralTypeAssertions: "allow-as-parameter" },
-  ],
-  "@typescript-eslint/no-for-in-array": "error",
-  "@typescript-eslint/no-invalid-void-type": "error",
-  "@typescript-eslint/no-meaningless-void-operator": "error",
-  "@typescript-eslint/no-misused-promises": "error",
-  "@typescript-eslint/no-unnecessary-type-arguments": "error",
-  "@typescript-eslint/no-unsafe-argument": "error",
-  "@typescript-eslint/no-unsafe-assignment": "error",
-  "@typescript-eslint/no-unsafe-call": "error",
-  "@typescript-eslint/prefer-for-of": "error",
-  "@typescript-eslint/switch-exhaustiveness-check": "error",
-  "@typescript-eslint/typedef": "error",
-  "@typescript-eslint/unbound-method": "error",
-  "@typescript-eslint/no-redeclare": "error",
-  "@typescript-eslint/no-array-constructor": "error",
-  "@typescript-eslint/no-invalid-this": "error",
-  "@typescript-eslint/no-empty-function": "off",
-  "dot-notation": "off", // conflicts with @typescript-eslint/dot-notation
-  "@typescript-eslint/dot-notation": "error",
-  "no-constant-condition": "off", // conflicts with @typescript-eslint/no-unnecessary-condition
-  "@typescript-eslint/no-unnecessary-condition": [
-    "error",
-    { allowConstantLoopConditions: true },
-  ],
+const js = require("@eslint/js")
+const prettierConfig = require("eslint-config-prettier")
+const prettierPlugin = require("eslint-plugin-prettier")
+const sonarjsPlugin = require("eslint-plugin-sonarjs")
+const unusedImportsPlugin = require("eslint-plugin-unused-imports")
+const simpleImportSortPlugin = require("eslint-plugin-simple-import-sort")
+const importPlugin = require("eslint-plugin-import")
+
+const basePlugins = {
+  prettier: prettierPlugin,
+  sonarjs: sonarjsPlugin,
+  "unused-imports": unusedImportsPlugin,
+  "simple-import-sort": simpleImportSortPlugin,
+  import: importPlugin,
 }
 
-const baseExtends = ["eslint:recommended", "plugin:prettier/recommended"]
+const getEslintTypescriptConfiguration = ({ rootDir }) => {
+  const typescriptEslintPlugin = require("@typescript-eslint/eslint-plugin")
+  const typescriptParser = require("@typescript-eslint/parser")
 
-const basePlugins = [
-  "sonarjs",
-  "unused-imports",
-  "simple-import-sort",
-  "import",
-  "prettier",
-]
+  const typescriptRules = {
+    "no-undef": "off", // this rule is already checked by TypeScript itself
+    "@typescript-eslint/strict-boolean-expressions": [
+      "error",
+      {
+        allowString: true,
+        allowNullableBoolean: true,
+        allowNumber: true,
+        allowNullableNumber: true,
+        allowNullableString: true,
+      },
+    ],
+    "@typescript-eslint/no-unused-vars": "off", // related to the "unused-imports" plugin
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/restrict-template-expressions": "error",
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-misused-new": "error",
+    "@typescript-eslint/await-thenable": "error",
+    "no-return-await": "off", // conflicts with @typescript-eslint/return-await
+    "@typescript-eslint/return-await": ["error", "always"],
+    "@typescript-eslint/require-await": "error",
+    "no-throw-literal": "off", // conflicts with @typescript-eslint/only-throw-error
+    "@typescript-eslint/only-throw-error": "error",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/ban-ts-comment": "error",
+    "@typescript-eslint/no-empty-object-type": "error",
+    "@typescript-eslint/no-unsafe-function-type": "error",
+    "@typescript-eslint/no-wrapper-object-types": "error",
+    "@typescript-eslint/consistent-type-assertions": [
+      "error",
+      {
+        assertionStyle: "as",
+        objectLiteralTypeAssertions: "allow-as-parameter",
+      },
+    ],
+    "@typescript-eslint/no-for-in-array": "error",
+    "@typescript-eslint/no-invalid-void-type": "error",
+    "@typescript-eslint/no-meaningless-void-operator": "error",
+    "@typescript-eslint/no-misused-promises": "error",
+    "@typescript-eslint/no-unnecessary-type-arguments": "error",
+    "@typescript-eslint/no-unsafe-argument": "error",
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unsafe-call": "error",
+    "@typescript-eslint/prefer-for-of": "error",
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "@typescript-eslint/typedef": "error",
+    "@typescript-eslint/unbound-method": "error",
+    "@typescript-eslint/no-redeclare": "error",
+    "@typescript-eslint/no-array-constructor": "error",
+    "@typescript-eslint/no-invalid-this": "error",
+    "@typescript-eslint/no-empty-function": "off",
+    "dot-notation": "off", // conflicts with @typescript-eslint/dot-notation
+    "@typescript-eslint/dot-notation": "error",
+    "no-constant-condition": "off", // conflicts with @typescript-eslint/no-unnecessary-condition
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { allowConstantLoopConditions: true },
+    ],
+  }
 
-const getEslintTypescriptOverride = ({ rootDir }) => {
   return {
-    plugins: [...basePlugins, "@typescript-eslint"],
-    extends: [...baseExtends, "plugin:@typescript-eslint/recommended"],
-    parser: "@typescript-eslint/parser",
-    parserOptions: {
-      project: path.join(rootDir, "tsconfig.json"),
-      tsconfigRootDir: rootDir,
-      extraFileExtensions: [".cjs", ".mjs"],
+    files: ["**/*.{ts,tsx,mts}"],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        project: path.join(rootDir, "tsconfig.json"),
+        tsconfigRootDir: rootDir,
+        extraFileExtensions: [".cjs", ".mjs"],
+        ecmaVersion: "latest",
+        sourceType: "module",
+      },
     },
-    files: "{*,**,**/*}.{ts,tsx,mts}",
+    plugins: { ...basePlugins, "@typescript-eslint": typescriptEslintPlugin },
     rules: { ...baseRules, ...typescriptRules },
   }
 }
 
-const getEslintConfiguration = ({ typescript } = {}) => {
-  return {
-    root: true,
-    extends: baseExtends,
+const getEslintConfiguration = ({ typescript, getBaseConfiguration } = {}) => {
+  let baseConf = {
+    languageOptions: {
+      sourceType: "commonjs",
+      ecmaVersion: "latest",
+    },
     plugins: basePlugins,
     rules: baseRules,
-    parserOptions: { ecmaVersion: "latest" },
-    ...(typescript
-      ? { overrides: [getEslintTypescriptOverride(typescript)] }
-      : {}),
   }
+  if (getBaseConfiguration) {
+    baseConf = getBaseConfiguration(baseConf)
+  }
+  const config = [js.configs.recommended, prettierConfig, baseConf]
+  if (typescript) {
+    config.push(getEslintTypescriptConfiguration(typescript))
+  }
+  return config
 }
 
-module.exports = { getEslintConfiguration, getEslintTypescriptOverride }
+module.exports = { getEslintConfiguration, getEslintTypescriptConfiguration }
