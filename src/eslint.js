@@ -110,7 +110,10 @@ const basePlugins = {
   import: importPlugin,
 }
 
-const getEslintTypescriptConfiguration = ({ rootDir }) => {
+const getEslintTypescriptConfiguration = ({
+  rootDir,
+  modBaseConfiguration,
+}) => {
   const typescriptEslintPlugin = require("@typescript-eslint/eslint-plugin")
   const typescriptParser = require("@typescript-eslint/parser")
 
@@ -181,7 +184,7 @@ const getEslintTypescriptConfiguration = ({ rootDir }) => {
     ],
   }
 
-  return {
+  let conf = {
     files: ["**/*.{ts,tsx,mts}"],
     languageOptions: {
       parser: typescriptParser,
@@ -196,9 +199,13 @@ const getEslintTypescriptConfiguration = ({ rootDir }) => {
     plugins: { ...basePlugins, "@typescript-eslint": typescriptEslintPlugin },
     rules: { ...baseRules, ...typescriptRules },
   }
+  if (modBaseConfiguration) {
+    conf = modBaseConfiguration(conf)
+  }
+  return conf
 }
 
-const getEslintConfiguration = ({ typescript, getBaseConfiguration } = {}) => {
+const getEslintConfiguration = ({ typescript, modBaseConfiguration } = {}) => {
   let baseConf = {
     languageOptions: {
       sourceType: "commonjs",
@@ -207,8 +214,8 @@ const getEslintConfiguration = ({ typescript, getBaseConfiguration } = {}) => {
     plugins: basePlugins,
     rules: baseRules,
   }
-  if (getBaseConfiguration) {
-    baseConf = getBaseConfiguration(baseConf)
+  if (modBaseConfiguration) {
+    baseConf = modBaseConfiguration(baseConf)
   }
   const config = [js.configs.recommended, prettierConfig, baseConf]
   if (typescript) {
