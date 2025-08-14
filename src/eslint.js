@@ -110,7 +110,7 @@ const basePlugins = {
   import: importPlugin,
 }
 
-const getEslintTypescriptConfig = ({ rootDir }) => {
+const getEslintTypescriptConfiguration = ({ rootDir }) => {
   const typescriptEslintPlugin = require("@typescript-eslint/eslint-plugin")
   const typescriptParser = require("@typescript-eslint/parser")
 
@@ -212,9 +212,9 @@ const getEslintConfiguration = ({ typescript, getBaseConfiguration } = {}) => {
   }
   const config = [js.configs.recommended, prettierConfig, baseConf]
   if (typescript) {
-    config.push(getEslintTypescriptConfig(typescript))
+    config.push(getEslintTypescriptConfiguration(typescript))
   }
   return config
 }
 
-module.exports = { getEslintConfiguration, getEslintTypescriptConfig }
+module.exports = { getEslintConfiguration, getEslintTypescriptConfiguration }
