@@ -48,7 +48,7 @@ const baseRules = {
   "sonarjs/no-identical-expressions": "error",
   "sonarjs/no-ignored-return": "error",
   "sonarjs/no-use-of-empty-return-value": "error",
-  "sonarjs/no-collapsible-if": "error",
+  "sonarjs/no-collapsible-if": "off",
   "sonarjs/non-existent-operator": "error",
   "sonarjs/no-collection-size-mischeck": "error",
   "sonarjs/no-duplicate-string": "error",
