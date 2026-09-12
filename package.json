@@ -1,27 +1,27 @@
 {
-  "name": "js-style",
-  "version": "0.0.0",
-  "license": "Unlicense",
-  "type": "commonjs",
-  "scripts": {
-    "fix:eslint": "eslint --fix",
-    "fix:prettier": "prettier --write",
-    "fix": "pnpm fix:eslint '{*,**/*}.js' && pnpm fix:prettier '{*,**/*}.json'"
-  },
-  "dependencies": {
-    "@eslint/js": "^10.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.70.0",
-    "@typescript-eslint/parser": "^8.70.0",
-    "eslint": "^10.10.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-prettier": "^5.5.6",
-    "eslint-plugin-simple-import-sort": "^14.0.0",
-    "eslint-plugin-sonarjs": "^4.2.0",
-    "eslint-plugin-unused-imports": "^4.4.1",
-    "prettier": "^3.9.6"
-  },
-  "devDependencies": {
-    "typescript": "^6.0.3"
-  }
+	"name": "js-style",
+	"version": "0.0.0",
+	"license": "Unlicense",
+	"type": "commonjs",
+	"scripts": {
+		"fix:eslint": "eslint --fix",
+		"fix:prettier": "prettier --write",
+		"fix": "pnpm fix:eslint '{*,**/*}.js' && pnpm fix:prettier '{*,**/*}.json'"
+	},
+	"dependencies": {
+		"@eslint/js": "^10.0.1",
+		"@typescript-eslint/eslint-plugin": "^8.70.0",
+		"@typescript-eslint/parser": "^8.70.0",
+		"eslint": "^10.10.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-prettier": "^5.5.6",
+		"eslint-plugin-simple-import-sort": "^14.0.0",
+		"eslint-plugin-sonarjs": "^4.2.0",
+		"eslint-plugin-unused-imports": "^4.4.1",
+		"prettier": "^3.9.6"
+	},
+	"devDependencies": {
+		"typescript": "^6.0.3"
+	}
 }
