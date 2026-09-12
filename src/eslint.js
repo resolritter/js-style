@@ -61,7 +61,7 @@ const baseRules = {
 
   // misc
   "no-unreachable-loop": "error",
-  "multiline-comment-style": ["error", "bare-block"],
+  "multiline-comment-style": "off",
   "no-constant-condition": ["error", { checkLoops: false }],
   "require-atomic-updates": "off",
   "use-isnan": "error",
