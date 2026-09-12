@@ -90,7 +90,6 @@ const baseRules = {
   "dot-notation": "error",
   "no-redeclare": "error",
   "arrow-parens": "error",
-  "arrow-body-style": ["error", "always"],
   "prefer-const": "error",
 }
 
@@ -207,10 +206,7 @@ const getEslintTypescriptConfiguration = ({
 
 const getEslintConfiguration = ({ typescript, modBaseConfiguration } = {}) => {
   let baseConf = {
-    languageOptions: {
-      sourceType: "commonjs",
-      ecmaVersion: "latest",
-    },
+    languageOptions: { sourceType: "commonjs", ecmaVersion: "latest" },
     plugins: basePlugins,
     rules: baseRules,
   }
