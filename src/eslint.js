@@ -90,6 +90,7 @@ const baseRules = {
   "dot-notation": "error",
   "no-redeclare": "error",
   "arrow-parens": "error",
+  "arrow-body-style": "off",
   "prefer-const": "error",
 }
 
